@@ -11,7 +11,9 @@ O projeto tem como objetivo principal criar uma plataforma que:
 
 ## 🚀 Tecnologias Utilizadas
 - [React](https://react.dev/)  
-- [Vite](https://vitejs.dev/)  
+- [Vite](https://vitejs.dev/) 
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Node.js](https://nodejs.org/en/)
 - Outras: ___  
 
 ---
