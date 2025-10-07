@@ -15,23 +15,23 @@ export default function Sidebar() {
             <div className="flex flex-col w-full gap-10 items-center">
                 <img src={Logo} className="w-25" alt="Logo do AmigoEdu"/>
                 <div className="flex flex-col gap-5 w-full">
-                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70">
+                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
                         <AiOutlineHome className="text-amber-50 text-xl"/>
                         <Link to="/"  className="text-amber-50">Visão Geral</Link>
                     </div>
-                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70">
+                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
                         <FaRegCheckSquare className="text-amber-50 text-lg"/>
                         <Link to="/"  className="text-amber-50">Metas</Link>
                     </div>
-                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70">
+                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
                         <LuCrown className="text-amber-50 text-lg"/>
                         <Link to="/"  className="text-amber-50">Ranking</Link>
                     </div>
-                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70">
+                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
                         <TbWorld className="text-amber-50 text-lg"/>
                         <Link to="/"  className="text-amber-50">Impacto</Link>
                     </div>
-                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70">
+                    <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
                         <IoSettingsOutline  className="text-amber-50 text-lg"/>
                         <Link to="/"  className="text-amber-50">Configurações</Link>
                     </div>
@@ -39,7 +39,7 @@ export default function Sidebar() {
             </div>
 
 
-            <div className="flex gap-4 p-2 w-25 justify-center bg-sky-700/50 rounded-2xl hover:bg-sky-700/70">
+            <div className="flex gap-4 p-2 w-25 justify-center bg-sky-700/50 rounded-2xl hover:bg-sky-700/70 hover:cursor-pointer">
                 <TbLogout2 className="text-amber-50 text-xl"/>
                 <span className="text-amber-50">Sair</span>
             </div>
