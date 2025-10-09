@@ -1,20 +1,17 @@
 import './App.css'
-import Sidebar from './components/Sidebar'
-import Ajuda from './components/Ajuda'
-
+import Home from './pages/Home'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-      <Router>
-      <Sidebar />
-      <Ajuda />
+    <Router>
+      <Home />
 
-      <Routes>
-        <Route path="/" />
-      </Routes>
-    </Router>
+        <Routes>
+          <Route path="/" />
+        </Routes>
+  </Router>
   )
 }
 
