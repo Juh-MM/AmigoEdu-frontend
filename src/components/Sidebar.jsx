@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 export default function Sidebar() {
     return(
-        <div className="flex flex-col h-215 w-60 m-5 p-5 gap-4 bg-sky-600 rounded-3xl justify-between text-sm">
+        <div className="flex flex-col h-240 w-60 m-5 mr-0 p-5 gap-4 bg-sky-600 rounded-3xl justify-between text-sm">
             <div className="flex flex-col w-full gap-10 items-center">
                 <img src={Logo} className="w-25" alt="Logo do AmigoEdu"/>
                 <div className="flex flex-col gap-5 w-full">
@@ -21,7 +21,7 @@ export default function Sidebar() {
                     </div>
                     <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
                         <FaRegCheckSquare className="text-amber-50 text-lg"/>
-                        <Link to="/"  className="text-amber-50">Metas</Link>
+                        <Link to="/metas"  className="text-amber-50">Metas</Link>
                     </div>
                     <div div className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
                         <LuCrown className="text-amber-50 text-lg"/>

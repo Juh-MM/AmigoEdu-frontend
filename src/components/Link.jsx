@@ -17,11 +17,11 @@ export default function Link() {
     };
     
     return(
-        <div className="flex flex-col gap-2 w-200">
+        <div className="flex flex-col gap-2 w-full">
             <h1 className="">Link para indicação:</h1>
             <div className="p-3 bg-neutral-50 rounded-xl flex flex-row justify-between items-center shadow-md">
                 <span className="text-yellow-400 font-semibold">https://react-icons.github.io/react-icons/search/#q=copy</span>
-                <button onClick={copyLink} className="flex flex-row gap-2 items-center text-sm hover:font-semibold">
+                <button onClick={copyLink} className="flex flex-row gap-2 items-center text-sm hover:text-sky-700">
                     <MdOutlineContentCopy className="text-lg" />
                     Copiar Link
                     </button>
