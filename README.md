@@ -48,13 +48,13 @@ npm run dev
 
 ## 🔗 Integração com o Backend
 Este repositório trabalha em conjunto com o backend:  
-👉 [AmigoEdu-backend](URL_DO_REPOSITORIO_DO_BACKEND)
+👉 [AmigoEdu-backend](https://github.com/limaamorim/Proleduca_Backend)
 
 ---
 
 ## 📅 Status do Projeto
 - [X] Em planejamento  
-- [ ] Em desenvolvimento  
+- [X] Em desenvolvimento  
 - [ ] Em testes  
 - [ ] Em produção  
 
