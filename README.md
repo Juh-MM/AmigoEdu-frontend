@@ -36,6 +36,11 @@ npm install
 
 # Execute em ambiente de desenvolvimento
 npm run dev
+
+# Faça loguin no sistema
+
+email = teste@email.com | senha = 123456
+
 ```
 
 ## 📌 Funcionalidades Principais
