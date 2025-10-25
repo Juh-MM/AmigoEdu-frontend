@@ -3,13 +3,13 @@ import { useState} from "react";
 
 export default function Link() {
     const [copied, setCopied] = useState(false);
-    const link = "https://react-icons.github.io/react-icons/search/#q=copy"; // link fixo provisorio
+    const link = "www.amigoedu.com/n88y947381pçebgw"; // link fixo provisorio
 
     const copyLink = async () => {
         try {
             await navigator.clipboard.writeText(link.toString());
             setCopied(true);
-            console.log('Link copiado para a área de transferência!');
+            alert('Link copiado!');
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
             console.error('Falha ao copiar o link: ', err);
@@ -17,14 +17,13 @@ export default function Link() {
     };
     
     return(
-        <div className="flex flex-col gap-2 w-full">
-            <h1 className="">Link para indicação:</h1>
-            <div className="p-3 bg-neutral-50 rounded-xl flex flex-row justify-between items-center shadow">
-                <span className="text-yellow-400 font-semibold">https://react-icons.github.io/react-icons/search/#q=copy</span>
-                <button onClick={copyLink} className="flex flex-row gap-2 items-center text-sm hover:text-sky-700">
-                    <MdOutlineContentCopy className="text-lg" />
-                    Copiar Link
-                    </button>
+        <div className="flex flex-row gap-2 w-full ">
+            <div className="flex flex-row gap-2 bg-neutral-50 h-11 rounded-3xl items-center w-full shadow-sm">
+                <span className="text-sky-800 font-semibold pl-4">Meu link de indicação:</span>
+                <span className="text-gray-500">{link}</span>
+            </div>
+            <div>
+                <button className="bg-amber-400 w-full text-amber-50 h-11 text-center text-nowrap p-5 px-7 items-center flex justify-center rounded-3xl shadow-sm hover:bg-amber-500 cursor-pointer" onClick={copyLink}>Copiar link</button>
             </div>
         </div>
     )
