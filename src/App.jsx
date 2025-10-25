@@ -1,6 +1,7 @@
 import './App.css'
 import Home from './pages/Home'
 import Metas from './pages/Metas'
+import Ranking from './pages/Ranking'
 import Sidebar from './components/Sidebar'
 import Ajuda from './components/Ajuda'
 import Profile from './components/Profile'
@@ -14,10 +15,9 @@ function App() {
       <div className="flex flex-col w-full">
         <Profile />
         <Routes>
-          {/* Rota do dashboard */}
           <Route path="/home" element={<Home />} />
-          {/* Outras páginas */}
           <Route path="/metas" element={<Metas />} />
+          <Route path="/ranking" element={<Ranking />} />
         </Routes>
         <Ajuda />
       </div>
@@ -26,3 +26,4 @@ function App() {
 }
 
 export default App
+
