@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 export default function Sidebar() {
     return(
-        <div className="flex flex-col h-240 w-60 m-5 mr-0 p-5 gap-4 bg-sky-600 rounded-3xl justify-between text-sm">
+        <div className="flex flex-col h-220 w-70 m-5 mr-0 p-5 gap-4 bg-sky-600 rounded-3xl justify-between text-sm">
             <div className="flex flex-col w-full gap-10 items-center">
                 <img src={Logo} className="w-25" alt="Logo do AmigoEdu"/>
                 <div className="flex flex-col gap-5 w-full">
