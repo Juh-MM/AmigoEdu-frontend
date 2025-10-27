@@ -18,6 +18,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/metas" element={<Metas />} />
           <Route path="/ranking" element={<Ranking />} />
+          <Route path="/impact" element={<Impact />} />
         </Routes>
         <Ajuda />
       </div>
