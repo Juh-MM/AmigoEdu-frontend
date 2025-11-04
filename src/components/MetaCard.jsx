@@ -1,18 +1,18 @@
 import { LiaUserFriendsSolid } from "react-icons/lia";
 
-export default function Metas() {
+export default function MetaCard({ titulo, descricao, recompensa}) {
     return(
-        <div className="flex bg-neutral-50 w-full rounded-3xl shadow p-7 gap-5 items-center justify-center">
+        <div className="flex flex-col bg-neutral-50 max-w-90 rounded-3xl shadow p-7 gap-2 items-center">
             <LiaUserFriendsSolid className="text-8xl text-amber-400" />
-            <div className="flex flex-col gap-3">
-                <p className="flex max-w-120 text-center text-base font-medium ">Chame 5 amigos para o AmigoEdu através do seu link e ganhe um bônus de 7 reais!</p>
+            <div className="flex flex-col gap-3 items-center">
+                <h1 className="font-semibold text-xl">{titulo}</h1>
+                <p className="flex text-center">{descricao}</p>
                 {/* barra de progresso */}
-                <div className="flex bg-sky-700 max-w-120 h-5 rounded-xl justify-center items-center">
-                    <p className="text-xs text-amber-50">5/5 amigos</p>
-                </div>
-                <span className="flex justify-end text-xs text-gray-600">Ler mais</span>
-            </div>
-            
+                    <div className="flex bg-sky-700  w-full h-3 rounded-xl justify-center items-center">
+                    </div>
+                <p className="outline rounded-2xl py-2 w-full text-center">Recompensa: R${recompensa}</p>
+                <span className="text-xs text-gray-600">faltam x indicações para completar essa meta</span>
+            </div>           
         </div>
     )
 }
