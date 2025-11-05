@@ -14,7 +14,7 @@ function App() {
     <div className="flex flex-row bg-neutral-100 min-h-screen">
       <Sidebar />
 
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col flex-1 ml-65 h-screen overflow-y-auto">
         <Profile />
         <Routes>
           <Route path="/home" element={<Home />} />
@@ -30,4 +30,3 @@ function App() {
 }
 
 export default App
-
