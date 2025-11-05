@@ -26,7 +26,7 @@ export default function Sidebar() {
                         <LuCrown className="text-amber-50 text-lg"/>
                         <h1 className="text-amber-50">Ranking</h1>
                     </Link>
-                    <Link to="/impacto" className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
+                    <Link to="/impact" className="flex gap-4 p-2 align-middle bg-sky-700/50 rounded-2xl px-4 hover:bg-sky-700/70 hover:cursor-pointer">
                         <TbWorld className="text-amber-50 text-lg"/>
                         <h1 className="text-amber-50">Impacto</h1>
                     </Link>

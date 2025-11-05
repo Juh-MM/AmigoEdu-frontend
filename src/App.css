@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+
+/* ANIMAÇÃO DA TELA DE IMPACTO */
+/* ===== SCROLL INFINITO DAS LOGOS ===== */
+
+.scroll-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+
+  /* faixa animada */
+  .scroll-track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: scroll-loop var(--scroll-speed, 35s) linear infinite;
+  }
+
+  .scroll-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* Animação cobre TODO o comprimento duplicado */
+  @keyframes scroll-loop {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% + 100vw));
+    }
+  }

@@ -24,7 +24,7 @@ function App() {
         </Routes>
         <Ajuda />
       </div>
-    </div>
+   </div>
   )
 }
 
