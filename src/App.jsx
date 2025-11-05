@@ -20,6 +20,7 @@ function App() {
           <Route path="/metas" element={<Metas />} />
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
+          <Route path="/impact" element={<Impact />} />
         </Routes>
         <Ajuda />
       </div>
