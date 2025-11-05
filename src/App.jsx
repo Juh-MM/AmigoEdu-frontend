@@ -2,6 +2,7 @@ import './App.css'
 import Home from './pages/Home'
 import Metas from './pages/Metas'
 import Ranking from './pages/Ranking'
+import Configuracoes from './pages/Configuracoes'
 import Sidebar from './components/Sidebar'
 import Ajuda from './components/Ajuda'
 import Profile from './components/Profile'
@@ -23,7 +24,7 @@ function App() {
         </Routes>
         <Ajuda />
       </div>
-    </div>
+   </div>
   )
 }
 
