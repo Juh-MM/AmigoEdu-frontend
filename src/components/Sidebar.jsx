@@ -1,4 +1,4 @@
-import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineStar } from "react-icons/ai";
 import { FaRegCheckSquare } from "react-icons/fa";
 import { LuCrown } from "react-icons/lu";
 import { TbWorld } from "react-icons/tb";
@@ -9,7 +9,7 @@ import Logo from '../assets/Logo.png';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Sidebar() {
-    
+
     const location = useLocation();
     const pathname = location.pathname;
 
@@ -26,23 +26,40 @@ export default function Sidebar() {
             <div className="flex flex-col h-full w-60 p-5 gap-4 bg-sky-600 rounded-3xl justify-between text-sm">
                 <div className="flex flex-col w-full gap-10 items-center">
                     <img src={Logo} className="w-25" alt="Logo do AmigoEdu"/>
+
                     <div className="flex flex-col gap-5 w-full">
+
+                        {/* VISÃO GERAL */}
                         <Link to="/home" className={getLinkClass("/home")}>
                             <AiOutlineHome className="text-amber-50 text-xl"/>
                             <h1 className="text-amber-50">Visão Geral</h1>
                         </Link>
-                        <Link to="/metas" className={getLinkClass("/metas")}>
+
+                        {/* USUÁRIOS */}
+                        <Link to="/usuarios" className={getLinkClass("/usuarios")}>
                             <FaRegCheckSquare className="text-amber-50 text-lg"/>
-                            <h1 className="text-amber-50">Metas</h1>
+                            <h1 className="text-amber-50">Usuários</h1>
                         </Link>
+
+                        {/* NOVO ITEM: SAQUES */}
+                        <Link to="/saques" className={getLinkClass("/saques")}>
+                            <AiOutlineStar className="text-amber-50 text-lg"/>
+                            <h1 className="text-amber-50">Saques</h1>
+                        </Link>
+
+                        {/* RANKING (mantido) */}
                         <Link to="/ranking" className={getLinkClass("/ranking")}>
                             <LuCrown className="text-amber-50 text-lg"/>
                             <h1 className="text-amber-50">Ranking</h1>
                         </Link>
-                        <Link to="/impact" className={getLinkClass("/impact")}>
+
+                        {/* IMPACTO → METAS */}
+                        <Link to="/metas" className={getLinkClass("/metas")}>
                             <TbWorld className="text-amber-50 text-lg"/>
-                            <h1 className="text-amber-50">Impacto</h1>
+                            <h1 className="text-amber-50">Metas</h1>
                         </Link>
+
+                        {/* CONFIGURAÇÕES */}
                         <Link to="/configuracoes" className={getLinkClass("/configuracoes")}>
                             <IoSettingsOutline  className="text-amber-50 text-lg"/>
                             <h1 className="text-amber-50">Configurações</h1>

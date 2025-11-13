@@ -1,5 +1,6 @@
 import './App.css'
 import Home from './pages/Home'
+import Usuarios from './pages/Usuarios';
 import Metas from './pages/Metas'
 import Ranking from './pages/Ranking'
 import Configuracoes from './pages/Configuracoes'
@@ -18,6 +19,7 @@ function App() {
         <Profile />
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route path="/usuarios" element={<Usuarios />} />
           <Route path="/metas" element={<Metas />} />
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
