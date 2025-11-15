@@ -39,7 +39,7 @@ npm run dev
 
 # Faça login no sistema
 
-email = teste@email.com | senha = 123456
+email =  | senha = 
 
 ```
 

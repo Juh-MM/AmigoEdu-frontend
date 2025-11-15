@@ -8,15 +8,13 @@ export default function BotaoSair() {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
-        const token = localStorage.getItem("token");
         try {
-            if (token) {
-                await logout(token);
-            }
+            await logout();
         } catch (error) {
             console.error("Erro ao fazer logout:", error);
         } finally {
             localStorage.removeItem("token");
+            localStorage.removeItem("user"); // Limpa também os dados do usuário
             navigate("/");
         }
     }

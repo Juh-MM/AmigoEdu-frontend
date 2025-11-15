@@ -1,34 +1,28 @@
-const API = "https://proleduca-backend.onrender.com/api/v1";
+import api from './api';
 
 export async function login(email, senha) {
-  const res = await fetch(`${API}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, senha }),
-  });
-
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || "Erro ao fazer login");
-  return data;
+  try {
+    const response = await api.post('/auth/login', { email, senha });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Erro ao fazer login");
+  }
 }
 
 export async function register(usuario) {
-  const res = await fetch(`${API}/usuarios/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(usuario),
-  });
-
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || "Erro ao cadastrar usuário");
-  return data;
+  try {
+    const response = await api.post('/usuarios/', usuario);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Erro ao cadastrar usuário");
+  }
 }
 
-export async function logout(token) {
-  const res = await fetch(`${API}/auth/logout`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });}
+export async function logout() {
+  try {
+    const response = await api.post('/auth/logout');
+    return response.data;
+  } catch (error) {
+    console.error("Erro no logout da API:", error.response?.data?.message || error.message);
+  }
+}
