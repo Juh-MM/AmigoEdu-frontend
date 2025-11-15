@@ -23,3 +23,12 @@ export async function register(usuario) {
   if (!res.ok) throw new Error(data.message || "Erro ao cadastrar usuário");
   return data;
 }
+
+export async function logout(token) {
+  const res = await fetch(`${API}/auth/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });}
