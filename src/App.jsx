@@ -4,7 +4,6 @@ import Usuarios from './pages/Usuarios';
 import Metas from './pages/Metas'
 import Ranking from './pages/Ranking'
 import Configuracoes from './pages/Configuracoes'
-import Impact from './pages/impact'
 import Sidebar from './components/Sidebar'
 import Ajuda from './components/Ajuda'
 import Profile from './components/Profile'
@@ -23,7 +22,6 @@ function App() {
           <Route path="/metas" element={<Metas />} />
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
-          <Route path="/impact" element={<Impact />} />
         </Routes>
         <Ajuda />
       </div>

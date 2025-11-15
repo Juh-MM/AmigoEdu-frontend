@@ -41,12 +41,6 @@ export default function Sidebar() {
                             <h1 className="text-amber-50">Usuários</h1>
                         </Link>
 
-                        {/* NOVO ITEM: SAQUES */}
-                        <Link to="/saques" className={getLinkClass("/saques")}>
-                            <AiOutlineStar className="text-amber-50 text-lg"/>
-                            <h1 className="text-amber-50">Saques</h1>
-                        </Link>
-
                         {/* RANKING (mantido) */}
                         <Link to="/ranking" className={getLinkClass("/ranking")}>
                             <LuCrown className="text-amber-50 text-lg"/>
