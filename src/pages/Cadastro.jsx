@@ -1,125 +1,105 @@
 import { useState } from "react";
-import { register } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 
-export default function Cadastro() {
+import Logo from "../components/Logo";
+import Input from "../components/Input";
+import Button from "../components/Button";
+import { register } from "../services/authService"; // Função que chama a API
 
+export default function Cadastro() {
   const [nome, setNome] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
-  const [cpf, setCpf] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [cpf, setCpf] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
-  // ---------------------------
-  // 🔢 CALCULAR IDADE
-  // ---------------------------
-  function calcularIdade(data) {
-    const hoje = new Date();
-    const nascimento = new Date(data);
-    let idade = hoje.getFullYear() - nascimento.getFullYear();
-    const mes = hoje.getMonth() - nascimento.getMonth();
-
-    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
-      idade--;
-    }
-    return idade;
-  }
-
-  // ---------------------------
-  // 📝 SUBMIT
-  // ---------------------------
   const handleCadastro = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // impede o reload da página
     setLoading(true);
 
     try {
-      const idade = calcularIdade(dataNascimento);
-
-      const usuario = {
-        nome,
-        telefone,
-        email,
-        cpf,
-        idade,
-        senha,
-      };
-
-      await register(usuario);
-
-      alert("Cadastro realizado com sucesso!");
+      const usuario = { nome, dataNascimento, email, telefone, cpf, senha };
+      const data = await register(usuario);
+      alert("✅ Cadastro realizado com sucesso!");
       navigate("/login");
-
     } catch (err) {
-      alert("Erro: " + err.message);
-
+      alert("❌ Erro ao cadastrar: " + err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="cadastro-container">
-      <h1>Cadastro</h1>
+    <div
+      className="flex items-center justify-center min-h-screen"
+      style={{ backgroundColor: "#3D70B4" }}
+    >
+      <div className="bg-white rounded-3xl shadow-2xl p-10 w-[600px] flex flex-col items-center">
+        <Logo />
 
-      <form onSubmit={handleCadastro}>
+        <p className="text-[#3B5474] font-medium text-sm mt-2 mb-4">
+          Preencha os campos a seguir:
+        </p>
 
-        <label>Nome:</label>
-        <input
-          type="text"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-        />
 
-        <label>Telefone:</label>
-        <input
-          type="text"
-          value={telefone}
-          onChange={(e) => setTelefone(e.target.value)}
-          required
-        />
+        <form
+          onSubmit={handleCadastro}
+          className="grid grid-cols-2 gap-4 w-full"
+        >
+          <Input
+            type="text"
+            placeholder="Digite seu nome completo"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
+          <Input
+            type="date"
+            placeholder="Data de nascimento"
+            value={dataNascimento}
+            onChange={(e) => setDataNascimento(e.target.value)}
+          />
+          <Input
+            type="email"
+            placeholder="Digite seu e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="Digite seu telefone"
+            value={telefone}
+            onChange={(e) => setTelefone(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="Digite seu CPF"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Crie uma senha forte"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
 
-        <label>E-mail:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
 
-        <label>CPF:</label>
-        <input
-          type="text"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
-          required
-        />
-
-        <label>Data de nascimento:</label>
-        <input
-          type="date"
-          value={dataNascimento}
-          onChange={(e) => setDataNascimento(e.target.value)}
-          required
-        />
-
-        <label>Senha:</label>
-        <input
-          type="password"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-          required
-        />
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Enviando..." : "Cadastrar"}
-        </button>
-
-      </form>
+          <div className="col-span-2 flex justify-between items-center mt-4">
+            <span
+              className="text-sm text-[#3D70B4] hover:underline cursor-pointer"
+              onClick={() => navigate("/login")}
+            >
+              Retornar
+            </span>
+            <Button type="submit" disabled={loading}>
+              {loading ? "Cadastrando..." : "Cadastrar"}
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
