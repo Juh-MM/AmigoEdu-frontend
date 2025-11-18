@@ -1,9 +1,18 @@
+import { useState, useEffect } from 'react';
 import Overview from '../components/Overview';
 import Link from '../components/Link';
 
 export default function Home() {
+    const [nome, setNome] = useState("");
 
-    const nome = "Usuário teste";
+    useEffect(() => {
+        const userDataString = localStorage.getItem('user');
+
+        if (userDataString) {
+            const userData = JSON.parse(userDataString);
+            setNome(userData.nome);
+        }
+    }, []); 
 
     return (
         <div className="flex flex-col gap-10 m-5 mt-0 justify-center">

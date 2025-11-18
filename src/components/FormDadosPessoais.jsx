@@ -33,15 +33,16 @@ export default function FormDadosPessoais() {
                         </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-sky-950 text-base font-semibold">Chave PIX</h1>
-                        <div className="flex flex-row justify-between items-center outline rounded-2xl w-full text-sm p-3">
-                            <p className="">Fulaninha silva</p>
-                            <LuPencil />
-                        </div>
+                        <h1 className="text-sky-950 text-base font-semibold">Método de pagamento</h1>
+                        <select className="flex flex-row justify-between items-center outline rounded-2xl text-sm p-3">
+                            <option value="PIX">Chave PIX</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="Boleto">Boleto</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            < BotaoSalvar />
+            <BotaoSalvar />
         </div>
     )
 }
