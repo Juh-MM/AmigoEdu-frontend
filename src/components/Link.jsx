@@ -1,17 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState , useContext } from "react";
+import { AuthContext } from "../services/authContext";
 
 export default function Link() {
+
+     const { user } = useContext(AuthContext);
+     const link_indicacao = user?.link_indicacao || "não disponível";
+
     const [copied, setCopied] = useState(false);
-    const [link_indicacao, setLink] = useState("");
-
-    useEffect(() => {
-        const userDataString = localStorage.getItem('user');
-        if (userDataString) {
-            const userData = JSON.parse(userDataString);
-            setLink(userData.link_indicacao);
-        };
-    }, []);
-
     const copyLink = async () => {
         try {
             await navigator.clipboard.writeText(link_indicacao);
@@ -23,7 +18,7 @@ export default function Link() {
             alert('Falha ao copiar o link.');
         }
     };
-    
+
     return(
         <div className="flex flex-row gap-2 w-full ">
             <div className="flex flex-row gap-2 bg-neutral-50 h-11 rounded-3xl items-center w-full shadow-sm">

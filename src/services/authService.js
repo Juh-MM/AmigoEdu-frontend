@@ -1,9 +1,12 @@
+// Arquivo mensageiro - apenas faz chamadas à API
 import api from './api';
 
 export async function login(email, senha) {
   try {
     const response = await api.post('/auth/login', { email, senha });
+    // console.log(response.data.user.role);
     return response.data;
+
   } catch (error) {
     throw new Error(error.response?.data?.message || "Erro ao fazer login");
   }
