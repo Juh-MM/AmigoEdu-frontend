@@ -27,15 +27,59 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: "#3D70B4" }}>
-      <div className="bg-white rounded-3xl shadow-2xl p-10 w-96 flex flex-col items-center">
+    <div
+      className="
+        min-h-screen 
+        flex 
+        items-center 
+        justify-center 
+        px-4
+        bg-[#3D70B4]
+      "
+    >
+      <div
+        className="
+          bg-white 
+          rounded-3xl 
+          shadow-2xl 
+          p-8 
+          w-full 
+          max-w-sm 
+          sm:max-w-md 
+          flex 
+          flex-col 
+          items-center
+        "
+      >
         <Logo />
 
-        <form onSubmit={handleLogin} className="flex flex-col w-full gap-4">
-          <Input type="email" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Input type="password" placeholder="Digite sua senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
-          <div className="flex justify-start text-sm text-[#3D70B4] hover:underline cursor-pointer">Esqueci minha senha</div>
-          <div  className="flex justify-center"><Button disabled={loading}>{loading ? "Entrando..." : "Entrar"}</Button></div>
+        <form
+          onSubmit={handleLogin}
+          className="flex flex-col w-full gap-4 mt-6"
+        >
+          <Input
+            type="email"
+            placeholder="Digite seu e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <Input
+            type="password"
+            placeholder="Digite sua senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
+
+          <div className="flex justify-start text-sm text-[#3D70B4] hover:underline cursor-pointer">
+            Esqueci minha senha
+          </div>
+
+          <div className="flex justify-center mt-2">
+            <Button disabled={loading}>
+              {loading ? "Entrando..." : "Entrar"}
+            </Button>
+          </div>
         </form>
 
         <div className="mt-6 text-sm text-center">
