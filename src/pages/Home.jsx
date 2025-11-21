@@ -3,29 +3,45 @@ import Overview from '../components/Overview';
 import Link from '../components/Link';
 
 export default function Home() {
-    const [nome, setNome] = useState("");
+  const [nome, setNome] = useState("");
 
-<<<<<<< HEAD
-    useEffect(() => {
-        const userDataString = localStorage.getItem('user');
+  useEffect(() => {
+    const userDataString = localStorage.getItem('user');
 
-        if (userDataString) {
-            const userData = JSON.parse(userDataString);
-            setNome(userData.nome);
-        }
-    }, []); 
-=======
-const nome = "Usuário teste";
->>>>>>> parent of 1b167d4 (Fix Sidebar)
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      setNome(userData.nome);
+    }
+  }, []);
 
-    return(
-            <div className="flex flex-col gap-10 m-5 mt-0 justify-center">
-                <div className="flex flex-row text-4xl gap-1">
-                    <h1>Olá,</h1> <h1 className="font-semibold">{nome}! 👋</h1>
-                </div>
-                
-                <Link />
-                <Overview />
-            </div>
-    )
+  return (
+    <div className="
+      w-full 
+      max-w-5xl 
+      mx-auto 
+      px-4 
+      py-6 
+      flex 
+      flex-col 
+      gap-10 
+    ">
+      
+      {/* Título Responsivo */}
+      <div className="flex flex-col sm:flex-row sm:items-center text-3xl sm:text-4xl lg:text-5xl gap-2">
+        <h1>Olá,</h1>
+        <h1 className="font-semibold">{nome}! 👋</h1>
+      </div>
+
+      {/* Link (botões/atalhos) */}
+      <div className="w-full">
+        <Link />
+      </div>
+
+      {/* Overview */}
+      <div className="w-full">
+        <Overview />
+      </div>
+
+    </div>
+  );
 }
