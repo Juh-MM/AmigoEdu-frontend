@@ -37,7 +37,6 @@ export default function Sidebar() {
                 </div>
             </div>
                 <BotaoSair />
-            </div>
         </div>
     )
 }
