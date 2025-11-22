@@ -15,11 +15,21 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
+      // ➕ Login fixo de admin
+      if (email === "Admin@teste.com" && senha === "123") {
+        localStorage.setItem("user", JSON.stringify({ email, role: "admin", nome: "Admin" }));
+        navigate("/admin/visao-geral"); // 🔹 Redireciona para página do admin
+        return;
+      }
+
+      // Login normal de usuários
       const data = await login(email, senha);
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/home");
+
     } catch (err) {
       alert(err.message);
     } finally {
