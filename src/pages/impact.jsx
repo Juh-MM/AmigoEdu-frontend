@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Impact() {
   return (
-    <main className="min-h-screen m-5">
+    <main className="min-h-screen bg-gray-50 p-6 md:p-12">
       <section className="max-w-6xl mx-auto">
         {/* HERO */}
         <header className="bg-white rounded-2xl shadow-sm p-8 mb-8">
