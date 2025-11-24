@@ -1,19 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from "../services/authContext";
 import { CgProfile } from "react-icons/cg";
 
 export default function Profile() {
-    const [nome, setNome] = useState("");
-    const [email, setEmail] = useState("");
-
-    useEffect(() => {
-        const userDataString = localStorage.getItem('user');
-
-        if (userDataString) {
-            const userData = JSON.parse(userDataString);
-            setNome(userData.nome);
-            setEmail(userData.email);
-        }
-    }, []);
+    const { user } = useContext(AuthContext);
+    const nome = user?.nome || "Usuário";
+    const email = user?.email || "E-mail";
 
     return(
         <div className="flex flex-row justify-end m-5">

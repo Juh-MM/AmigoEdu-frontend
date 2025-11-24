@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import Overview from '../components/Overview';
 import Link from '../components/Link';
+import { AuthContext } from '../services/authContext';
 
 export default function Home() {
-    const [nome, setNome] = useState("");
-
-<<<<<<< HEAD
+    const { user } = useContext(AuthContext)
+    const nome = user?.nome || "Usuário";
     useEffect(() => {
         const userDataString = localStorage.getItem('user');
 
@@ -13,10 +13,7 @@ export default function Home() {
             const userData = JSON.parse(userDataString);
             setNome(userData.nome);
         }
-    }, []); 
-=======
-const nome = "Usuário teste";
->>>>>>> parent of 1b167d4 (Fix Sidebar)
+    }, []);
 
     return(
             <div className="flex flex-col gap-10 m-5 mt-0 justify-center">

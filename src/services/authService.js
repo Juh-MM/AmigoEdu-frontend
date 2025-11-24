@@ -1,62 +1,31 @@
-// src/services/authService.js
+// Arquivo mensageiro - apenas faz chamadas à API
+import api from './api';
 
-const API = "https://proleduca-backend.onrender.com/api/v1";
-
-// ---------------------------
-//  LOGIN
-// ---------------------------
 export async function login(email, senha) {
-  const res = await fetch(`${API}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, senha }),
-  });
+  try {
+    const response = await api.post('/auth/login', { email, senha });
+    // console.log(response.data.user.role);
+    return response.data;
 
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || "Erro ao fazer login");
-
-  // salvar token
-  localStorage.setItem("token", data.token);
-  localStorage.setItem("usuario", JSON.stringify(data.usuario));
-
-  return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Erro ao fazer login");
+  }
 }
 
-// ---------------------------
-//  REGISTRO
-// ---------------------------
 export async function register(usuario) {
-  const res = await fetch(`${API}/usuarios/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(usuario),
-  });
-
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || "Erro ao cadastrar usuário");
-
-  return data;
+  try {
+    const response = await api.post('/usuarios/', usuario);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Erro ao cadastrar usuário");
+  }
 }
 
-// ---------------------------
-//  PEGAR TOKEN
-// ---------------------------
-export function getToken() {
-  return localStorage.getItem("token");
-}
-
-// ---------------------------
-//  PEGAR USUÁRIO LOGADO
-// ---------------------------
-export function getUsuarioLogado() {
-  const u = localStorage.getItem("usuario");
-  return u ? JSON.parse(u) : null;
-}
-
-// ---------------------------
-//  LOGOUT
-// ---------------------------
-export function logout() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("usuario");
+export async function logout() {
+  try {
+    const response = await api.post('/auth/logout');
+    return response.data;
+  } catch (error) {
+    console.error("Erro no logout da API:", error.response?.data?.message || error.message);
+  }
 }
