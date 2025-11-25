@@ -23,8 +23,8 @@ const Ranking = () => {
   };
 
   return (
-    <div className="flex-1 bg-gray-50 min-h-screen p-8">
-      <h1 className="text-3xl font-semibold mb-2">Ranking geral</h1>
+    <div className="flex-1 min-h-screen">
+      <h1 className="text-4xl font-semibold mb-2">Ranking geral</h1>
       <p className="mb-6 text-gray-700">
         Parabéns, <span className="font-medium">Maria Luiza</span>. Você está no top 3!
       </p>
