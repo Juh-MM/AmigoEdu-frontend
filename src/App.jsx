@@ -9,7 +9,6 @@ import Impact from './pages/impact'
 import Sidebar from './components/Sidebar'
 import Ajuda from './components/Ajuda'
 import Profile from './components/Profile'
-import ProtectedRoute from './components/ProtectedRoute'
 
 // Admin
 import AdminLayout from './pages/admin/AdminLayout'
@@ -43,18 +42,14 @@ function App() {
       }/>
 
       {/* Fluxo admin */}
-      <Route path="/admin/*" element={
-        <ProtectedRoute>
-          <AdminLayout />
-        </ProtectedRoute>
-      }>
-          <Route index element={<VisaoGeral />} />
-          <Route path="visao-geral" element={<VisaoGeral />} />
-          <Route path="usuarios" element={<Usuarios />} />
-          <Route path="metas" element={<MetasAdmin />} />
-          <Route path="ranking" element={<RankingAdmin />} />
-          <Route path="configuracoes" element={<ConfiguracoesAdmin />} />
-      </Route> 
+      <Route path="/admin/*" element={<AdminLayout />}>
+        <Route index element={<VisaoGeral />} />
+        <Route path="visao-geral" element={<VisaoGeral />} />
+        <Route path="usuarios" element={<Usuarios />} />
+        <Route path="metas" element={<MetasAdmin />} />
+        <Route path="ranking" element={<RankingAdmin />} />
+        <Route path="configuracoes" element={<ConfiguracoesAdmin />} />
+      </Route>
     </Routes>
   )
 }

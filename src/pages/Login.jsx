@@ -1,12 +1,12 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { AuthContext } from "../services/authContext";
+import { login } from "../services/authService";
 
 export default function Login() {
-  const { login } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,14 +17,19 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const user = await login(email, senha);
-
-      // Redireciona com base na role do usuário
-      if (user.role === "admin") {
-        navigate("/admin/visao-geral");
-      } else {
-        navigate("/home");
+      // ➕ Login fixo de admin
+      if (email === "Admin@teste.com" && senha === "123") {
+        localStorage.setItem("user", JSON.stringify({ email, role: "admin", nome: "Admin" }));
+        navigate("/admin/visao-geral"); // 🔹 Redireciona para página do admin
+        return;
       }
+
+      // Login normal de usuários
+      const data = await login(email, senha);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/home");
+
     } catch (err) {
       alert(err.message);
     } finally {
