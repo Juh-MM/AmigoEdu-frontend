@@ -19,7 +19,7 @@ export default function Sidebar() {
   };
 
     return(
-        <div className="flex flex-col w-65 p-5 gap-4 bg-sky-600 rounded-3xl justify-between text-sm h-[calc(100vh-2.5rem)] m-5">
+        <div className="flex flex-col w-60 p-5 gap-4 bg-sky-600 rounded-3xl justify-between text-sm h-[calc(100vh-2.5rem)] m-5">
             <div className="flex flex-col w-full gap-10 items-center">
                 <img src={Logo} className="w-25" alt="Logo do AmigoEdu"/>
                 <div className="flex flex-col gap-5 w-full">
