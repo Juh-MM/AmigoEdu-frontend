@@ -1,0 +1,22 @@
+import NovaMeta from "./NovaMeta";
+
+export default function ListaMetas({ metas, onAtualizarLista, onEditar }) {
+  return (
+    <div className="mt-10 flex flex-col items-center">
+      <h2 className="text-[20px] font-semibold mb-6 self-start">
+        Todas as metas
+      </h2>
+
+      <div className="grid grid-cols-2 gap-8 place-items-center w-full max-w-[800px]">
+        {metas.map((meta) => (
+          <NovaMeta
+            key={meta.id}
+            meta={meta}
+            onAtualizarLista={onAtualizarLista}
+            onEditar={onEditar} // <- garante que existe
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
