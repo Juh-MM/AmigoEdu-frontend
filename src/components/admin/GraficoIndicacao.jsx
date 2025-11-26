@@ -35,7 +35,7 @@ export default function GraficoIndicacao() {
   }, []);
 
   return (
-    <div className="bg-white rounded-2xl p-5 shadow-md h-64 w-1/2">
+    <div className="bg-white rounded-2xl p-5 shadow-md h-64 w-full lg:w-1/2">
       <h3 className="mb-3 text-lg font-semibold">Indicações no mês</h3>
       <div className="h-[85%]">
         <ResponsiveContainer width="100%" height="100%">
