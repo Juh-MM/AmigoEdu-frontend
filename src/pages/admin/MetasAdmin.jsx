@@ -1,55 +1,64 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import MetaCardCriar from "../../components/admin/MetaCardCriar";
-import NovaMeta from "../../components/admin/NovaMeta";
+import FormCriarMeta from "../../components/admin/FormCriarMeta";
+import ListaMetas from "../../components/admin/ListaMetas";
 
 export default function MetasAdmin() {
   const [metas, setMetas] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [mostrandoForm, setMostrandoForm] = useState(false);
+  const [metaEditando, setMetaEditando] = useState(null);
 
-  const carregarMetas = async () => {
-    setLoading(true);
-    try {
-      const res = await api.get("/metas");
-      setMetas(res.data || []);
-    } catch (err) {
-      console.error("Erro ao carregar metas:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  async function carregarMetas() {
+    const res = await api.get("/metas");
+    setMetas(res.data || []);
+  }
 
   useEffect(() => {
     carregarMetas();
   }, []);
 
-  const adicionarMetaNaLista = (novaMeta) => {
-    setMetas([novaMeta, ...metas]);
-  };
+  function abrirFormularioCriar() {
+    setMetaEditando(null);
+    setMostrandoForm(true);
+  }
+
+  function abrirFormularioEditar(meta) {
+    setMetaEditando(meta);
+    setMostrandoForm(true);
+  }
+
+  function atualizarLista() {
+    carregarMetas();
+    setMostrandoForm(false);
+    setMetaEditando(null);
+  }
 
   return (
-    <div className="p-5">
-      {/* Título */}
-      <div className="flex justify-start text-4xl font-semibold mb-4">
-        Gerenciar Metas
-      </div>
+    <div className="p-6 w-full">
 
-      {/* Cards */}
-      <div className="flex flex-wrap gap-6 mt-4">
-        {/* Card criar nova meta */}
-        <MetaCardCriar onMetaCriada={adicionarMetaNaLista} />
+      {/* Título da página */}
+      <h3 className="text-[35px] font-semibold mb-4">Criar Metas</h3>
 
-        {/* Cards existentes */}
-        {loading ? (
-          <p className="text-center w-full mt-5">Carregando metas...</p>
-        ) : metas.length === 0 ? (
-          <p className="text-center w-full mt-5 opacity-60">Nenhuma meta encontrada...</p>
+      {/* Card criar meta ou formulário */}
+      <div className="flex w-full justify-center">
+        {!mostrandoForm ? (
+          <MetaCardCriar onAbrirFormulario={abrirFormularioCriar} />
         ) : (
-          metas.map((meta) => (
-            <NovaMeta key={meta.id} meta={meta} onAtualizarLista={carregarMetas} />
-          ))
+          <FormCriarMeta
+            metaParaEditar={metaEditando}
+            onSucesso={atualizarLista}
+            onCancelar={() => setMostrandoForm(false)}
+          />
         )}
       </div>
+
+      {/* Lista */}
+      <ListaMetas
+        metas={metas}
+        onAtualizarLista={carregarMetas}
+        onEditar={abrirFormularioEditar}
+      />
     </div>
   );
 }
