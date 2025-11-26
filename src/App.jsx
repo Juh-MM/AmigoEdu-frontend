@@ -6,7 +6,7 @@ import Home from './pages/Home'
 import Metas from './pages/Metas'
 import Ranking from './pages/Ranking'
 import Configuracoes from './pages/Configuracoes'
-import Impact from './pages/impact'
+import Sobre from './pages/Sobre'
 import Sidebar from './components/Sidebar'
 import Ajuda from './components/Ajuda'
 import Profile from './components/Profile'
@@ -68,7 +68,7 @@ function App() {
           <Route path="metas" element={<Metas />} />
           <Route path="ranking" element={<Ranking />} />
           <Route path="configuracoes" element={<Configuracoes />} />
-          <Route path="impact" element={<Impact />} />
+          <Route path="sobre" element={<Sobre />} />
         </Route>
 
         {/* Fluxo admin (protegido e reservado a admin) */}
