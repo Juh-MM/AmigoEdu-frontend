@@ -38,7 +38,12 @@ export default function Login() {
         <form onSubmit={handleLogin} className="flex flex-col w-full gap-4">
           <Input type="email" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
           <Input type="password" placeholder="Digite sua senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
-          <div className="flex justify-start text-sm text-[#3D70B4] hover:underline cursor-pointer">Esqueci minha senha</div>
+          <div
+            className="flex justify-start text-sm text-[#3D70B4] hover:underline cursor-pointer"
+            onClick={() => navigate("/esqueci-senha")}>
+            Esqueci minha senha
+          </div>
+
           <div className="flex justify-center"><Button disabled={loading}>{loading ? "Entrando..." : "Entrar"}</Button></div>
         </form>
         <div className="mt-6 text-sm text-center">

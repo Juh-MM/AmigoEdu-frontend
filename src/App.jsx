@@ -19,18 +19,20 @@ import MetasAdmin from './pages/admin/MetasAdmin'
 import RankingAdmin from './pages/admin/RankingAdmin'
 import ConfiguracoesAdmin from './pages/admin/ConfiguracoesAdmin'
 
+// Recuperação de senha + login
+import Login from './pages/Login'
+import EsqueciSenhaEmail from './pages/EsqueciSenhaEmail'
+import VerificarCodigo from './pages/VerificarCodigo'
+import NovaSenha from './pages/NovaSenha'
+
 // Auth
+import Cadastro from './pages/Cadastro'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import { AuthProvider } from './services/authContext'
 import { RequireAuth } from './components/RequireAuth'
 import { RequireAdmin } from './components/RequireAdmin'
 
-// Páginas públicas
-import Login from './pages/Login'
-import Cadastro from './pages/Cadastro' 
-
 function UserLayout() {
-  // layout que engloba as páginas do usuário (replica seu markup)
   return (
     <div className="flex flex-row bg-neutral-100 min-h-screen">
       <Sidebar />
@@ -47,15 +49,20 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        {/* Rotas públicas */}
+
+        {/* 🔹 Rotas públicas */}
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
 
-        {/* Redireciona / para /home (pode ajustar) */}
-        <Route index element={<Navigate to="/home" replace />} />
-        <Route path="/" element={<Navigate to="/home" replace />} />
+        {/* Recuperação de senha */}
+        <Route path="/esqueci-senha" element={<EsqueciSenhaEmail />} />
+        <Route path="/verificar-codigo" element={<VerificarCodigo />} />
+        <Route path="/nova-senha" element={<NovaSenha />} />
 
-        {/* Fluxo de usuários (protegido) */}
+        {/* Redirecionamento padrão */}
+        <Route index element={<Navigate to="/home" replace />} />
+
+        {/* 🔹 Fluxo de usuários (protegido) */}
         <Route
           path="/*"
           element={
@@ -71,7 +78,7 @@ function App() {
           <Route path="impact" element={<Impact />} />
         </Route>
 
-        {/* Fluxo admin (protegido e reservado a admin) */}
+        {/* 🔹 Fluxo admin (apenas admin) */}
         <Route
           path="/admin/*"
           element={
@@ -88,7 +95,7 @@ function App() {
           <Route path="configuracoes" element={<ConfiguracoesAdmin />} />
         </Route>
 
-        {/* Fallback 404 */}
+        {/* 404 */}
         <Route path="*" element={<div className="p-8">404 - Página não encontrada</div>} />
       </Routes>
     </AuthProvider>
