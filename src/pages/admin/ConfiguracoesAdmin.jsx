@@ -1,10 +1,15 @@
-// src/pages/admin/ConfiguracoesAdmin.jsx
-export default function ConfiguracoesAdmin() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Configurações Admin</h1>
-      <p>Painel de configurações do administrador.</p>
-    </div>
-  );
-}
+import FormDadosPessoais from "../../components/admin/AdminDadosPessoais";
 
+export default function Configuracoes() {
+    return (
+        <div className="flex flex-col gap-10 m-5 mt-0 justify-center">
+            <div className="flex flex-col text-4xl gap-1"> 
+                <h1 className="font-semibold">Configurações</h1>
+                <p className="text-base">Gerencie suas preferências e dados pessoais!</p>
+            </div>
+            <div className="flex flex-col gap-5">
+                <FormDadosPessoais />
+            </div>
+        </div>
+    );
+}
