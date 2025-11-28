@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Ranking from "../../components/admin/Ranking";
+import axios from "axios";
 
 export default function RankingAdmin() {
   const [activeTab, setActiveTab] = useState("Diário");

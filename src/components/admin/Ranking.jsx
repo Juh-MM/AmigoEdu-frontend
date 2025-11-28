@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import RankingTabs from "./RankingTabs";
 import RankingLista from "./RankingLista";
 
@@ -17,8 +17,8 @@ export default function Ranking({ tabs, activeTab, onChangeTab }) {
   useEffect(() => {
     async function carregar() {
       try {
-        const resp = await axios.get(
-          `http://localhost:3000/api/v1${rotas[activeTab]}`
+        const resp = await api.get(
+          rotas[activeTab] || "/ranking/todos"
         );
 
         setData(resp.data.data || []);
