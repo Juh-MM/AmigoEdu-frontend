@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Impact() {
+export default function Sobre() {
   return (
     <main className="min-h-screen mr-5">
       <section className="max-w-6xl mx-auto">

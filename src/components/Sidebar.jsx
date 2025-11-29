@@ -3,6 +3,7 @@ import { FaRegCheckSquare } from "react-icons/fa";
 import { LuCrown } from "react-icons/lu";
 import { TbWorld } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
+import { IoSearchSharp } from "react-icons/io5";
 
 import BotaoSair from "./BotaoSair";
 import Logo from '../assets/Logo.png';
@@ -35,9 +36,13 @@ export default function Sidebar() {
                         <LuCrown className="text-amber-50 text-lg"/>
                         <h1 className="text-amber-50">Ranking</h1>
                     </Link>
-                    <Link to="/impact" className={getLinkClass("/impact")}>
+                    <Link to="/impacto" className={getLinkClass("/impacto")}>
                         <TbWorld className="text-amber-50 text-lg"/>
                         <h1 className="text-amber-50">Impacto</h1>
+                    </Link>
+                    <Link to="/sobre" className={getLinkClass("/sobre")}>
+                        <IoSearchSharp className="text-amber-50 text-lg"/>
+                        <h1 className="text-amber-50">Sobre</h1>
                     </Link>
                     <Link to="/configuracoes" className={getLinkClass("/configuracoes")}>
                         <IoSettingsOutline  className="text-amber-50 text-lg"/>
