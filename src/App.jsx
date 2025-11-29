@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Metas from './pages/Metas'
 import Ranking from './pages/Ranking'
 import Configuracoes from './pages/Configuracoes'
+import Impacto from './pages/Impacto'
 import Sobre from './pages/Sobre'
 import Sidebar from './components/Sidebar'
 import Ajuda from './components/Ajuda'
@@ -68,6 +69,7 @@ function App() {
           <Route path="metas" element={<Metas />} />
           <Route path="ranking" element={<Ranking />} />
           <Route path="configuracoes" element={<Configuracoes />} />
+          <Route path="impacto" element={<Impacto />} />
           <Route path="sobre" element={<Sobre />} />
         </Route>
 
