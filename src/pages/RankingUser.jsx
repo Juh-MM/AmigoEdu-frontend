@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Ranking from "../../components/admin/Ranking";
+import Ranking from "../components/Ranking";
 import axios from "axios";
 
 export default function RankingAdmin() {
@@ -14,7 +14,7 @@ export default function RankingAdmin() {
       <div className="flex flex-col gap-1">
         <h1 className="text-4xl font-semibold">Ranking geral</h1>
         <p className="mb-6 text-gray-700">
-          Ranking de todos os usuários cadastrados.
+          Parabéns! Você está entre os melhores usuários cadastrados!
         </p>
       </div>
 

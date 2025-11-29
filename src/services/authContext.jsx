@@ -37,14 +37,6 @@ export function AuthProvider({ children }) {
   async function login(email, senha) {
     setLoading(true);
     try {
-      // caso de admin fixo local (mantém seu comportamento atual)
-      if (email === "Admin@teste.com" && senha === "123") {
-        const adminPayload = { email, nome: "Admin", role: "admin", id: 0 };
-        setUser(adminPayload);
-        setToken("local-admin-token"); // token fictício
-        return adminPayload;
-      }
-
       // login real via API
       const data = await loginApi(email, senha);
       // espera que `data` contenha { token, user }
@@ -55,7 +47,7 @@ export function AuthProvider({ children }) {
         id: data.user.id,
         email: data.user.email,
         link_indicacao: data.user.link_indicacao,
-        telefone: data.user.telefone,
+        telefone: data.user.telefone ?? null
       });
       return data.user;
     } finally {

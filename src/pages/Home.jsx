@@ -27,7 +27,8 @@ export default function Home() {
                 if (user?.id) {
                     // Buscar gamificação
                     const gamificacaoResponse = await api.get(`/gamificacao/usuario/${user.id}`);
-                    setGamificacao(gamificacaoResponse.data);
+                    // resposta pode vir em resp.data.data ou resp.data
+                    setGamificacao(gamificacaoResponse.data?.data ?? gamificacaoResponse.data ?? null);
 
                     // Buscar impacto (renda gerada)
                     const impactoResponse = await api.get(`/impactos/usuario/${user.id}`);
@@ -35,9 +36,12 @@ export default function Home() {
 
                     // Buscar ranking para obter posição
                     const rankingResponse = await api.get('/ranking/todos');
-                    const usuarios = rankingResponse.data.data; // Acesse .data.data
-                    
-                    const userPos = usuarios.findIndex(u => u.usuario_id === user.id) + 1;
+                    const usuarios = rankingResponse.data?.data ?? rankingResponse.data ?? [];
+
+                    const userPos = usuarios.findIndex(u =>
+                        u.usuario_id === user.id || u.id === user.id || u.usuario?.id === user.id
+                    ) + 1;
+
                     setPosicaoRanking(userPos > 0 ? userPos : null);
 
                 }

@@ -1,6 +1,6 @@
-import api from "../../services/api";
+import api from "../services/api";
 import { useEffect, useState } from "react";
-import defaultAvatar from "../../assets/user1.jpg";
+import defaultAvatar from "../assets/user1.jpg";
 
 export default function RankingCard({ posicao, usuario, corPosicao }) {
   const [data, setData] = useState([]);
