@@ -1,27 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import BotaoSalvar from "./BotaoSalvar";
 import { BsPerson } from "react-icons/bs";
 import { LuPencil } from "react-icons/lu";
 
 import { alterarUsuario } from "../services/userService";
+import { AuthContext } from "../services/authContext";
 
 export default function FormDadosPessoais() {
+    const { user, setUser } = useContext(AuthContext);
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [telefone, setTelefone] = useState("");
     const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const userDataString = localStorage.getItem('user');
+        // prioriza o contexto de autenticação quando disponível
+        const stored = localStorage.getItem('user');
+        const local = stored ? JSON.parse(stored) : null;
+        const initial = user ?? local;
 
-        if (userDataString) {
-            const userData = JSON.parse(userDataString);
-            setNome(userData.nome);
-            setEmail(userData.email);
-            setTelefone(userData.telefone || "Não informado"); 
-            setUserData(userData);
+        if (initial) {
+            console.log('User data loaded for form:', initial);
+            setNome(initial.nome ?? "");
+            setEmail(initial.email ?? "");
+            // evita preencher com mensagem de texto que seria enviada ao servidor
+            setTelefone(initial.telefone ?? "");
+            setUserData(initial);
         }
-    }, []);
+    }, [user]);
 
     const handleAlterarUsuario = async (e) => {
         e.preventDefault();
@@ -30,14 +37,36 @@ export default function FormDadosPessoais() {
             return;
         }
 
+        setLoading(true);
         try {
-            const dadosAtualizados = { nome, email, telefone };
-            const response = await alterarUsuario(userData.id, dadosAtualizados);
-            // Atualiza o localStorage com os novos dados do usuário
-            localStorage.setItem('user', JSON.stringify({ ...userData, ...dadosAtualizados }));
+            const payload = {
+                nome,
+                email,
+                telefone: telefone === "" ? null : telefone,
+            };
+
+            const response = await alterarUsuario(userData.id, payload);
+            // response pode ter formato { data: { ... } } ou já ser o objeto atualizado
+            const updated = response?.data ?? response ?? {};
+
+            // merge com o user atual e garante formato consistente
+            const newUser = {
+                ...userData,
+                ...(updated || {}),
+                nome: updated.nome ?? payload.nome ?? userData.nome,
+                email: updated.email ?? payload.email ?? userData.email,
+                telefone: updated.telefone ?? payload.telefone ?? userData.telefone ?? "Não informado",
+            };
+
+            // atualiza localStorage e AuthContext (se disponível)
+            localStorage.setItem('user', JSON.stringify(newUser));
+            if (setUser) setUser(newUser);
+
             alert("Dados alterados com sucesso!");
         } catch (error) {
             alert(error.message || "Não foi possível alterar os dados.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -76,19 +105,11 @@ export default function FormDadosPessoais() {
                     <div className="flex flex-col gap-2">
                         <h1 className="text-sky-950 text-base font-semibold">Telefone</h1>
                         <div className="relative flex items-center outline rounded-2xl">
-                            <input type="tel" value={telefone} onChange={(e) => setTelefone(e.target.value)} className=" rounded-2xl w-full text-sm p-3 pr-10" />
+                            <input type="tel" value={telefone || "Não informado"} onChange={(e) => setTelefone(e.target.value)} className=" rounded-2xl w-full text-sm p-3 pr-10" />
                             <LuPencil className="absolute right-3" />
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <h1 className="text-sky-950 text-base font-semibold">Método de pagamento</h1>
-                        <select className="flex flex-row justify-between items-center outline rounded-2xl text-sm p-3">
-                            <option value="PIX">Chave PIX</option>
-                            <option value="PayPal">PayPal</option>
-                            <option value="Boleto">Boleto</option>
-                        </select>
-                    </div>
-                    <BotaoSalvar type="submit" />
+                    <BotaoSalvar type="submit" loading={loading} disabled={loading} />
                 </form>
             </div>
         </div>

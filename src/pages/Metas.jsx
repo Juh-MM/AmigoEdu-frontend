@@ -1,33 +1,24 @@
+import { useEffect, useState } from "react";
 import MetaCard from "../components/MetaCard";
-
-const metas = [
-    {
-        id: 1,
-        titulo: "Primeiros passos",
-        descricao: "Chame 5 amigos para o AmigoEdu através do seu link.",
-        recompensa: "5,00"
-    },
-    {
-        id: 2,
-        titulo: "Explorador",
-        descricao: "Chame 7 amigos para o AmigoEdu através do seu link.",
-        recompensa: "7,00"
-    },
-    {
-        id: 3,
-        titulo: "Influenciador",
-        descricao: "Continue chamando amigos para o AmigoEdu através do seu link por 5 dias seguidos.",
-        recompensa: "9,50"
-    },
-    {
-        id: 4,
-        titulo: "Amigo de verdade", 
-        descricao: "Chame 10 amigos para o AmigoEdu através do seu link.",
-        recompensa: "10,00"
-    } 
-];
+import api from "../services/api"; // Ajuste o caminho se necessário
 
 export default function Metas() {
+    const [metas, setMetas] = useState([]);
+
+    async function carregarMetas() {
+      try {
+        const res = await api.get("/metas");
+        setMetas(res.data || []);
+      } catch (error) {
+        console.error("Erro ao carregar metas:", error);
+        // Opcional: mostrar um erro para o usuário
+      }
+    }
+  
+    useEffect(() => {
+      carregarMetas();
+    }, []);
+
     return(
         <div className="flex flex-col gap-10 m-5 ml-0 mt-0 justify-center">
             <div className="flex flex-col text-4xl gap-1"> 
@@ -39,7 +30,7 @@ export default function Metas() {
                     {metas.map((meta) => 
                 <MetaCard 
                     key={meta.id}
-                    titulo={meta.titulo}
+                    titulo={meta.nome}
                     descricao={meta.descricao}
                     recompensa={meta.recompensa}
                 />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
+import api from "../services/api";
 import RankingTabs from "./RankingTabs";
 import RankingLista from "./RankingLista";
 

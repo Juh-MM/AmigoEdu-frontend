@@ -4,7 +4,7 @@ import './App.css'
 // Usuário
 import Home from './pages/Home'
 import Metas from './pages/Metas'
-import Ranking from './pages/Ranking'
+import RankingUser from './pages/RankingUser'
 import Configuracoes from './pages/Configuracoes'
 import Impacto from './pages/Impacto'
 import Sobre from './pages/Sobre'
@@ -74,7 +74,7 @@ function App() {
         >
           <Route path="home" element={<Home />} />
           <Route path="metas" element={<Metas />} />
-          <Route path="ranking" element={<Ranking />} />
+          <Route path="ranking" element={<RankingUser />} />
           <Route path="configuracoes" element={<Configuracoes />} />
           <Route path="impacto" element={<Impacto />} />
           <Route path="sobre" element={<Sobre />} />

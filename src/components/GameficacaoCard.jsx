@@ -40,7 +40,7 @@ export default function GameficacaoCard({ nivel, metasBatidas, rankingPosicao })
             {rankingPosicao ? `#${rankingPosicao}` : "-"}
           </span>
         </div>
-
+        
       </div>
     </div>
   );
