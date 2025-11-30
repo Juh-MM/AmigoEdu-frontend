@@ -21,7 +21,6 @@ export default function FormDadosPessoais() {
         const initial = user ?? local;
 
         if (initial) {
-            console.log('User data loaded for form:', initial);
             setNome(initial.nome ?? "");
             setEmail(initial.email ?? "");
             // evita preencher com mensagem de texto que seria enviada ao servidor

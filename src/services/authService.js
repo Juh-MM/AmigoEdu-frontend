@@ -4,7 +4,6 @@ import api from './api';
 export async function login(email, senha) {
   try {
     const response = await api.post('/auth/login', { email, senha });
-    // console.log(response.data.user.role);
     return response.data;
 
   } catch (error) {
@@ -14,7 +13,7 @@ export async function login(email, senha) {
 
 export async function register(usuario) {
   try {
-    const response = await api.post('/usuarios/', usuario);
+    const response = await api.post('/usuarios', usuario);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Erro ao cadastrar usuário");

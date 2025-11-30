@@ -45,7 +45,10 @@ export default function UsuariosGerenciarPage() {
 
 
   const usuariosFiltrados = usuarios.filter((u) =>
-    u.nome?.toLowerCase().includes(buscaDebounced.toLowerCase())
+    u.nome?.toLowerCase().includes(buscaDebounced.toLowerCase()) ||
+    u.email?.toLowerCase().includes(buscaDebounced.toLowerCase()) ||
+    u.id.toString().includes(buscaDebounced) ||
+    u.cpf?.toLowerCase().includes(buscaDebounced.toLowerCase())
   );
 
 
@@ -66,7 +69,7 @@ export default function UsuariosGerenciarPage() {
           Nenhum usuário encontrado...
         </p>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 max-w-[900px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 w-full mx-auto">
           {usuariosFiltrados.map((u) => (
             <GerenciarUsuario
               key={u.id}

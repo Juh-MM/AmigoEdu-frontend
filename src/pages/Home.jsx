@@ -32,7 +32,6 @@ export default function Home() {
 
                     // Buscar impacto (renda gerada)
                     const impactoResponse = await api.get(`/impactos/usuario/${user.id}`);
-                    console.log('Impacto:', impactoResponse.data);
 
                     // Buscar ranking para obter posição
                     const rankingResponse = await api.get('/ranking/todos');
@@ -67,9 +66,8 @@ export default function Home() {
     return(
         <div className="flex flex-col gap-10 m-5 ml-0 mt-0 justify-center">
     
-            <div className="flex flex-row text-4xl gap-1">
-                <h1>Olá,</h1> 
-                <h1 className="font-semibold">{nome}! 👋</h1>
+            <div className="text-3xl lg:text-4xl font-semibold">
+                <h1>Olá, {nome}! 👋</h1>
             </div>
     
             {/* Primeiro Overview */}

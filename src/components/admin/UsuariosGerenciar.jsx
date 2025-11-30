@@ -1,6 +1,6 @@
-// src/components/GerenciarUsuario.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { FiEdit2, FiTrash2, FiX } from "react-icons/fi";
+import { MdBlock } from "react-icons/md";
 import api from "../../services/api";
 
 export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
@@ -36,7 +36,7 @@ export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
 
     try {
       setLoading(true);
-      await api.delete(`/usuarios/${usuario.id}`);
+      await api.delete(`/admin/usuarios/${usuario.id}`);
       onAtualizarLista();
     } catch (err) {
       console.error("Erro ao deletar usuário:", err);
@@ -60,89 +60,100 @@ export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
   // }
 
   return (
-    <>
-      {/* CARD */}
-      <div className="bg-white p-4 rounded-xl mb-3 flex justify-between items-center w-[400px] shadow hover:shadow-lg transition">
-        <div>
-          <div className="text-[17px] font-bold mb-1">{usuario.nome}</div>
-          <div className="text-[14px] opacity-60">{usuario.email}</div>
-        </div>
+  <>
+    {/* CARD */}
+    <div className="bg-white p-4 rounded-xl mb-3 gap-3 flex flex-col sm:flex-row justify-between items-start sm:items-center w-full shadow hover:shadow-lg transition">
+      {/* Info */}
+      <div className="w-full sm:w-2/3">
+        <div className="text-lg sm:text-xl font-bold mb-1 truncate">{usuario.nome}</div>
+        <div className="text-sm sm:text-base opacity-60 truncate">E-mail: {usuario.email}</div>
+        <div className="text-sm sm:text-base opacity-60">CPF: {usuario.cpf}</div>
+        <div className="text-sm sm:text-base opacity-60">Id: {usuario.id}</div>
+      </div>
 
-        <div className="flex gap-3">
-          {/* Botão Editar — mesma aparência original */}
-          <button
-            className="bg-[#0066FF] text-white p-2 rounded-full cursor-pointer"
-            onClick={() => setAbrir(true)}
-            aria-label={`Editar ${usuario.nome}`}
-            title="Editar usuário"
-          >
-            <FiEdit2 size={18} />
-          </button>
+      {/* Ações */}
+      <div className="w-full sm:w-auto mt-3 sm:mt-0 flex flex-row sm:flex-col gap-2 sm:gap-3 items-center sm:items-end">
+        <button
+          className="flex-shrink-0 bg-[#0066FF] text-white p-2 rounded-full cursor-pointer"
+          onClick={() => setAbrir(true)}
+          aria-label={`Editar ${usuario.nome}`}
+          title="Editar usuário"
+        >
+          <FiEdit2 size={18} />
+        </button>
 
-          {/* Botão Deletar — mesma aparência original */}
+        <button
+          className="flex-shrink-0 bg-gray-400 hover:bg-gray-500 text-white p-2 rounded-full cursor-pointer transition-colors"
+          aria-label={`Suspender ${usuario.nome}`}
+          title="Suspender usuário"
+        >
+          <MdBlock size={18} />
+        </button>
+
+        <button
+          className="flex-shrink-0 bg-yellow-400 hover:bg-yellow-500 text-white p-2 rounded-full cursor-pointer transition-colors"
+          onClick={deletar}
+          aria-label={`Deletar ${usuario.nome}`}
+          title="Deletar usuário"
+        >
+          <FiTrash2 size={18} />
+        </button>
+      </div>
+    </div>
+
+    {/* MODAL */}
+    {abrir && (
+      <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50 p-4">
+        <div className="w-full max-w-md bg-white p-4 sm:p-5 rounded-xl relative">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-[18px] font-semibold">Gerenciar Usuário</h3>
+            <FiX
+              size={22}
+              className="cursor-pointer"
+              onClick={() => setAbrir(false)}
+              aria-label="Fechar modal"
+              title="Fechar"
+            />
+          </div>
+
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
+            value={form.nome}
+            onChange={(e) => alterar("nome", e.target.value)}
+            placeholder="Nome"
+          />
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
+            value={form.email}
+            onChange={(e) => alterar("email", e.target.value)}
+            placeholder="Email"
+          />
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
+            value={form.telefone}
+            onChange={(e) => alterar("telefone", e.target.value)}
+            placeholder="Telefone"
+          />
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
+            type="number"
+            value={form.idade}
+            onChange={(e) => alterar("idade", e.target.value)}
+            placeholder="Idade"
+          />
+
           <button
-            className="bg-yellow-400 hover:bg-yellow-500 text-white p-2 rounded-full cursor-pointer transition-colors"
-            onClick={deletar}
-            aria-label={`Deletar ${usuario.nome}`}
-            title="Deletar usuário"
+            className={`bg-[#0066FF] text-white w-full p-3 rounded-lg text-[15px] cursor-pointer ${
+              loading ? "opacity-60 pointer-events-none" : ""
+            }`}
+            onClick={salvarAlteracoes}
           >
-            <FiTrash2 size={18} />
+            {loading ? "Salvando..." : "Salvar Alterações"}
           </button>
         </div>
       </div>
+    )}
+  </>
 
-      {/* MODAL */}
-      {abrir && (
-        <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
-          <div className="w-[330px] bg-white p-5 rounded-xl relative">
-            <div className="flex justify-between mb-4">
-              <h3 className="text-[18px] font-semibold">Gerenciar Usuário</h3>
-              <FiX
-                size={22}
-                className="cursor-pointer"
-                onClick={() => setAbrir(false)}
-                aria-label="Fechar modal"
-                title="Fechar"
-              />
-            </div>
-
-            <input
-              className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
-              value={form.nome}
-              onChange={(e) => alterar("nome", e.target.value)}
-              placeholder="Nome"
-            />
-            <input
-              className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
-              value={form.email}
-              onChange={(e) => alterar("email", e.target.value)}
-              placeholder="Email"
-            />
-            <input
-              className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
-              value={form.telefone}
-              onChange={(e) => alterar("telefone", e.target.value)}
-              placeholder="Telefone"
-            />
-            <input
-              className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
-              type="number"
-              value={form.idade}
-              onChange={(e) => alterar("idade", e.target.value)}
-              placeholder="Idade"
-            />
-
-            <button
-              className={`bg-[#0066FF] text-white w-full p-3 rounded-lg text-[15px] cursor-pointer ${
-                loading ? "opacity-60 pointer-events-none" : ""
-              }`}
-              onClick={salvarAlteracoes}
-            >
-              {loading ? "Salvando..." : "Salvar Alterações"}
-            </button>
-          </div>
-        </div>
-      )}
-    </>
   );
 }

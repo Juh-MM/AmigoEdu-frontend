@@ -28,7 +28,8 @@ export default function EsqueciSenhaEmail() {
   };
 
   return (
-    <AuthLayout>
+  <AuthLayout className="px-4">
+    <div className="w-full max-w-md mx-auto flex flex-col items-center gap-6 py-8">
       <Logo />
 
       <AuthHeader
@@ -38,6 +39,7 @@ export default function EsqueciSenhaEmail() {
 
       <form onSubmit={handleSendEmail} className="flex flex-col w-full gap-4">
         <Input
+          className="w-full"
           type="email"
           placeholder="Digite seu e-mail"
           value={email}
@@ -45,12 +47,15 @@ export default function EsqueciSenhaEmail() {
           required
         />
 
-        <CenterButton disabled={loading}>
-          {loading ? "Enviando..." : "Enviar código"}
-        </CenterButton>
+        <div className="w-full">
+          <CenterButton className="w-full" disabled={loading}>
+            {loading ? "Enviando..." : "Enviar código"}
+          </CenterButton>
+        </div>
       </form>
 
       <AuthBackLink to="/" label="Voltar ao login" />
-    </AuthLayout>
-  );
+    </div>
+  </AuthLayout>
+);
 }
