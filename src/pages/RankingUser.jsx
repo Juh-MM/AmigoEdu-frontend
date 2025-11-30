@@ -10,11 +10,11 @@ export default function RankingAdmin() {
     <div className="flex flex-col m-5 mb-30 md:m-0 md:mr-5 md:mb-0">
 
       {/* TÍTULO */}
-      <div className="flex flex-col gap-1">
-        <h1 className="text-4xl font-semibold">Ranking geral</h1>
-        <p className="mb-6 text-gray-700">
-          Parabéns! Você está entre os melhores usuários cadastrados!
-        </p>
+      <div className="border-b border-gray-200 pb-6">
+          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
+            Ranking
+            </h1>
+          <p className="text-gray-600 mt-2">Visualize seu ranking atual</p>
       </div>
 
       {/* TABS */}
