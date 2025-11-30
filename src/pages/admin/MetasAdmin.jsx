@@ -35,7 +35,7 @@ export default function MetasAdmin() {
   }
 
   return (
-    <div className="p-6 w-full">
+    <div className="p-0 w-full pb-0 md:pb-10">
 
       {/* Título da página */}
       <h3 className="text-[35px] font-semibold mb-4">Criar Metas</h3>

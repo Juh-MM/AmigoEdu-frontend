@@ -21,12 +21,8 @@ export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
   async function salvarAlteracoes() {
     try {
       setLoading(true);
-      await api.put(`/admins/users/${usuario.id}`, form);
-      // Atualiza local sem recarregar lista completa
-      usuario.nome = form.nome;
-      usuario.email = form.email;
-      usuario.telefone = form.telefone;
-      usuario.idade = form.idade;
+      await api.put(`/usuarios/${usuario.id}`, form);
+      onAtualizarLista();
       setAbrir(false);
     } catch (err) {
       console.error("Erro ao salvar alterações:", err);
@@ -41,13 +37,11 @@ export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
 
     try {
       setLoading(true);
-      await api.delete(`/admins/usuarios/${usuario.id}`);
-      onAtualizarLista();
+      await api.delete(`/admins/users/${usuario.id}`);   
+      onAtualizarLista(); // Aqui ainda precisa remover da lista externa
     } catch (err) {
-      console.error("Erro ao deletar usuário:", err);
+      console.error("Erro ao deletar usuário:", err);  
       alert("Não foi possível deletar o usuário.");
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -97,21 +91,71 @@ async function suspender() {
             aria-label={suspenso ? `Reativar ${usuario.nome}` : `Suspender ${usuario.nome}`}
             title={suspenso ? "Reativar usuário" : "Suspender usuário"}
           >
-            <FiClock size={18} />
+            <MdBlock size={18} />
           </button>
 
+           <button
+          className="flex-shrink-0 bg-yellow-400 hover:bg-yellow-500 text-white p-2 rounded-full cursor-pointer transition-colors"
+          onClick={deletar}
+          aria-label={`Deletar ${usuario.nome}`}
+          title="Deletar usuário"
+        >
+          <FiTrash2 size={18} />
+        </button>
+      </div>
+    </div>
+
+    {/* MODAL */}
+    {abrir && (
+      <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50 p-4">
+        <div className="w-full max-w-md bg-white p-4 sm:p-5 rounded-xl relative">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-[18px] font-semibold">Gerenciar Usuário</h3>
+            <FiX
+              size={22}
+              className="cursor-pointer"
+              onClick={() => setAbrir(false)}
+              aria-label="Fechar modal"
+              title="Fechar"
+            />
+          </div>
+
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
+            value={form.nome}
+            onChange={(e) => alterar("nome", e.target.value)}
+            placeholder="Nome"
+          />
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
+            value={form.email}
+            onChange={(e) => alterar("email", e.target.value)}
+            placeholder="Email"
+          />
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
+            value={form.telefone}
+            onChange={(e) => alterar("telefone", e.target.value)}
+            placeholder="Telefone"
+          />
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg mb-3 text-[15px]"
+            type="number"
+            value={form.idade}
+            onChange={(e) => alterar("idade", e.target.value)}
+            placeholder="Idade"
+          />
           <button
-            className={`bg-[#0066FF] text-white w-full p-3 rounded-lg text-[15px] cursor-pointer ${
-              loading ? "opacity-60 pointer-events-none" : ""
-            }`}
-            onClick={salvarAlteracoes}
-          >
-            {loading ? "Salvando..." : "Salvar Alterações"}
-          </button>
+              className={`bg-[#0066FF] text-white w-full p-3 rounded-lg text-[15px] cursor-pointer ${
+                loading ? "opacity-60 pointer-events-none" : ""
+              }`}
+              onClick={salvarAlteracoes}
+            >
+              {loading ? "Salvando..." : "Salvar Alterações"}
+            </button>
         </div>
       </div>
     )}
-  </>
-
+    </>
   );
 }

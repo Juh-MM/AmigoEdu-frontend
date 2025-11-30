@@ -72,12 +72,7 @@ export default function MenuLateral() {
             <Link
               key={link.to}
               to={link.to}
-              className={`
-                flex-shrink-0 flex flex-col items-center justify-center
-                gap-1 rounded-lg text-amber-50 hover:cursor-pointer
-                px-2 py-2
-                min-w-[44px] sm:min-w-[56px]
-              `}
+              className={getLinkClassMobile(link.to)}
               aria-current={pathname === link.to ? "page" : undefined}
               title={link.label}
             >
@@ -100,7 +95,7 @@ export default function MenuLateral() {
             </button>
           </div>
         </div>
-</nav>
+  </nav>
     </>
   );
 }

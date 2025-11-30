@@ -22,23 +22,24 @@ export default function NovaMeta({ meta, onAtualizarLista, onEditar }) {
   }
 
   return (
-    <MetaCardAdmin className="w-[330px] h-[230px] gap-3 relative">
-      <h2 className="font-semibold text-lg">{meta.nome}</h2>
-      <p className="text-sm opacity-70">{meta.descricao}</p>
+    <MetaCardAdmin className="w-full relative flex flex-col justify-between gap-1">
+      <h2 className="font-semibold text-xl">{meta.nome}</h2>
+      <p className="text-base opacity-70">{meta.descricao}</p>
 
-      <span className="text-sm">Indicações: {meta.alvo_indicacoes}</span>
-      <span className="text-sm">Recompensa: R$ {meta.recompensa}</span>
+      <span className="text-sm text-sky-900">Indicações: {meta.alvo_indicacoes}</span>
+      <span className="text-sm text-sky-900">Recompensa: R$ {meta.recompensa}</span>
+      <span className="text-sm text-sky-900">Id: {meta.id}</span>
 
-      <div className="absolute top-4 right-4 flex gap-3">
+      <div className="absolute top-7 right-7 flex gap-3">
         <button
-          className="hover:opacity-70"
+          className="hover:opacity-70 text-sky-600"
           onClick={() => onEditar(meta)}
         >
           <Pencil size={20} />
         </button>
 
         <button
-          className="hover:opacity-70 text-red-500"
+          className="hover:opacity-70 text-amber-500"
           onClick={deletar}
         >
           <Trash2 size={20} />

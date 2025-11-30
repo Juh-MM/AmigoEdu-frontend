@@ -64,19 +64,12 @@ export default function Home() {
     }
 
     return(
-        <div className="flex flex-col gap-10 m-5 ml-0 mt-0 justify-center">
-    
+        <div className="flex flex-col gap-10 m-5 md:ml-0 mt-0 justify-center">
             <div className="text-3xl lg:text-4xl font-semibold">
                 <h1>Olá, {nome}! 👋</h1>
             </div>
-    
-            {/* Primeiro Overview */}
-            <Overview />
-    
-            {/* Depois Link */}
             <Link />
-    
-            {/* Por fim Gameficação */}
+            <Overview />
             <GameficacaoCard
                 nivel={gamificacao?.nivel ?? 0}
                 metasBatidas={gamificacao?.metas_batidas ?? 0}

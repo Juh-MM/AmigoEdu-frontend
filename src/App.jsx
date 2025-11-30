@@ -7,7 +7,6 @@ import Metas from './pages/Metas'
 import RankingUser from './pages/RankingUser'
 import Configuracoes from './pages/Configuracoes'
 import Impacto from './pages/Impacto'
-import Sobre from './pages/Sobre'
 import Sidebar from './components/Sidebar'
 import Ajuda from './components/Ajuda'
 import Profile from './components/Profile'
@@ -77,7 +76,6 @@ function App() {
           <Route path="ranking" element={<RankingUser />} />
           <Route path="configuracoes" element={<Configuracoes />} />
           <Route path="impacto" element={<Impacto />} />
-          <Route path="sobre" element={<Sobre />} />
         </Route>
 
         {/* 🔹 Fluxo admin (apenas admin) */}

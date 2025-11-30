@@ -1,4 +1,5 @@
-import FormDadosPessoais from "../../components/FormDadosPessoais";
+import FormDadosPessoais from "../../components/admin/FormDadosPessoaisAdmin";
+import FormNotificacoes from "../../components/FormNotificacoes";
 
 export default function Configuracoes() {
     return (
@@ -9,6 +10,7 @@ export default function Configuracoes() {
             </div>
             <div className="flex flex-col gap-5">
                 <FormDadosPessoais />
+                <FormNotificacoes />
             </div>
         </div>
     );

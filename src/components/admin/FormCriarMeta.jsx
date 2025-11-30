@@ -40,7 +40,7 @@ export default function FormCriarMeta({ metaParaEditar, onCancelar, onSucesso })
   }
 
   return (
-    <MetaCardAdmin className="w-[702px] h-auto gap-5 items-center">
+    <MetaCardAdmin className="w-full max-w-[800px] h-auto gap-5 items-center">
       <h2 className="text-2xl font-semibold">
         {metaParaEditar ? "Editar Meta" : "Criar Meta"}
       </h2>
@@ -84,14 +84,14 @@ export default function FormCriarMeta({ metaParaEditar, onCancelar, onSucesso })
       <div className="flex gap-4 mt-4">
         <button
           onClick={salvar}
-          className="bg-[#3D70B4] text-white rounded-xl px-8 py-2"
+          className="bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-2xl px-8 py-2"
         >
           {loading ? "Salvando..." : "Salvar"}
         </button>
 
         <button
           onClick={onCancelar}
-          className="bg-gray-300 rounded-xl px-8 py-2"
+          className="bg-gray-300 hover:bg-gray-400 rounded-2xl px-8 py-2"
         >
           Cancelar
         </button>
