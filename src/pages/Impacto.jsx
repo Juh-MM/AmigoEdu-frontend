@@ -59,9 +59,9 @@ export default function Impacto() {
     ];
 
     return (
-        <div className="flex flex-col gap-5 m-5 ml-0 mt-0 justify-center">
+        <div className="flex flex-col gap-5 m-5 md:m-0 md:mr-5 justify-center">
             <div className="flex flex-col gap-2">
-                <h1 className="text-4xl font-bold">Meu Impacto</h1>
+                <h1 className="text-4xl font-semibold">Meu Impacto</h1>
                 <p className="text-gray-700">Veja o impacto real que suas indicações estão gerando!</p>
             </div>
 

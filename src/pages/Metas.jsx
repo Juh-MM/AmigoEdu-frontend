@@ -20,13 +20,13 @@ export default function Metas() {
     }, []);
 
     return(
-        <div className="flex flex-col gap-10 m-5 ml-0 mt-0 justify-center">
+        <div className="flex flex-col gap-10 m-5 md:m-0 md:mr-5 justify-center mb-30 md:mb-0">
             <div className="flex flex-col text-4xl gap-1"> 
                 <h1 className="font-semibold">Minhas metas</h1>
                 <p className="text-base">Complete metas e ganhe recompensas extras!</p>
             </div>
             <div className="flex justify-center w-full">
-                <div className="grid grid-cols-3 gap-6 max-w-7xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl">
                     {metas.map((meta) => 
                 <MetaCard 
                     key={meta.id}

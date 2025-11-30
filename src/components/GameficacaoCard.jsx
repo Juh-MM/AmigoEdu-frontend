@@ -2,7 +2,7 @@ import { FaTrophy, FaBullseye, FaUserAlt } from "react-icons/fa";
 
 export default function GameficacaoCard({ nivel, metasBatidas, rankingPosicao }) {
   return (
-    <div className="w-full h-[300px] bg-white rounded-2xl shadow-md p-5 flex flex-col gap-5">
+    <div className="w-full h-[300px] bg-white rounded-3xl shadow-md p-5 flex flex-col gap-5">
 
       <h2 className="text-2xl font-semibold text-gray-800">Sua Gamificação ⭐</h2>
 

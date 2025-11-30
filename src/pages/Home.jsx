@@ -64,8 +64,8 @@ export default function Home() {
     }
 
     return(
-        <div className="flex flex-col gap-10 m-5 md:ml-0 mt-0 justify-center">
-            <div className="text-3xl lg:text-4xl font-semibold">
+        <div className="flex flex-col gap-10 m-5 mb-30 md:mb-0 md:ml-0 justify-center">
+            <div className="text-4xl lg:text-4xl font-semibold">
                 <h1>Olá, {nome}! 👋</h1>
             </div>
             <Link />

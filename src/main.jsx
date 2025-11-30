@@ -22,3 +22,12 @@ createRoot(document.getElementById('root')).render(
       </BrowserRouter>
   </StrictMode>
 )
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then(() => console.log('Service Worker registrado!'))
+      .catch((err) => console.error('Erro ao registrar SW:', err));
+  });
+}

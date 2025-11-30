@@ -4,7 +4,7 @@ export default function RankingTabs({ tabs, activeTab, onChange }) {
       className="
         flex overflow-x-auto sm:overflow-visible
         gap-2 bg-blue-100 p-1 rounded-lg w-full sm:w-fit
-        sm:flex-row
+        sm:flex-row justify-around
         flex-wrap sm:flex-nowrap
         no-scrollbar
       "

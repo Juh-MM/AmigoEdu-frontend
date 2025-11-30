@@ -84,7 +84,7 @@ export default function Overview() {
           <span className="font-medium text-3xl">
             {loading ? "—" : `R$ ${overviewData.saldoAcumulado}`}
           </span>
-          <h1 className="text-sky-800 text-base font-semibold">Saldo acumulado</h1>
+          <h1 className="text-sky-800 text-base text-center font-semibold">Saldo acumulado</h1>
         </div>
         <SaqueButton />
       </div>

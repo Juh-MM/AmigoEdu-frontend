@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Ranking from "../components/Ranking";
-import axios from "axios";
 
 export default function RankingAdmin() {
   const [activeTab, setActiveTab] = useState("Diário");
@@ -8,7 +7,7 @@ export default function RankingAdmin() {
   const tabs = ["Diário", "Semanal", "Mensal", "Todos"];
 
   return (
-    <div className="flex flex-col mr-5">
+    <div className="flex flex-col m-5 mb-30 md:m-0 md:mr-5 md:mb-0">
 
       {/* TÍTULO */}
       <div className="flex flex-col gap-1">
