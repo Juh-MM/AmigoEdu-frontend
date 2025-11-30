@@ -49,7 +49,7 @@ export default function Ranking({ tabs, activeTab, onChangeTab }) {
       />
 
       {/* LISTAS */}
-      <div className="mt-8 grid grid-cols-2 gap-8">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
 
         <RankingLista
           data={data.slice(0, 6)}
