@@ -1,11 +1,11 @@
-// src/components/GerenciarUsuario.jsx
 import React, { useState } from "react";
-import { FiEdit2, FiTrash2, FiX } from "react-icons/fi";
+import { FiEdit2, FiTrash2, FiX, FiClock } from "react-icons/fi";
 import api from "../../services/api";
 
 export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
   const [abrir, setAbrir] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [suspenso, setSuspenso] = useState(usuario.suspended || false); // Estado local
   const [form, setForm] = useState({
     nome: usuario.nome || "",
     email: usuario.email || "",
@@ -20,8 +20,12 @@ export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
   async function salvarAlteracoes() {
     try {
       setLoading(true);
-      await api.put(`/usuarios/${usuario.id}`, form);
-      onAtualizarLista();
+      await api.put(`/admins/users/${usuario.id}`, form);
+      // Atualiza local sem recarregar lista completa
+      usuario.nome = form.nome;
+      usuario.email = form.email;
+      usuario.telefone = form.telefone;
+      usuario.idade = form.idade;
       setAbrir(false);
     } catch (err) {
       console.error("Erro ao salvar alterações:", err);
@@ -36,8 +40,8 @@ export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
 
     try {
       setLoading(true);
-      await api.delete(`/usuarios/${usuario.id}`);
-      onAtualizarLista();
+      await api.delete(`/admins/users/${usuario.id}`);
+      onAtualizarLista(); // Aqui ainda precisa remover da lista externa
     } catch (err) {
       console.error("Erro ao deletar usuário:", err);
       alert("Não foi possível deletar o usuário.");
@@ -46,30 +50,30 @@ export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
     }
   }
 
-  // async function suspender() {
-  //   try {
-  //     setLoading(true);
-  //     await api.post(`/usuarios/${usuario.id}/suspender`);
-  //     onAtualizarLista();
-  //   } catch (err) {
-  //     console.error("Erro ao suspender usuário:", err);
-  //     alert("Não foi possível suspender o usuário.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+async function suspender() {
+  try {
+    setLoading(true);
+    await api.patch(`/admins/users/${usuario.id}/suspender`, { suspended: !suspenso });
+    setSuspenso(prev => !prev); // Atualiza só o card
+  } catch (err) {
+    console.error("Erro ao suspender usuário:", err);
+    alert("Não foi possível suspender o usuário.");
+  } finally {
+    setLoading(false);
+  }
+}
+
 
   return (
     <>
       {/* CARD */}
       <div className="bg-white p-4 rounded-xl mb-3 flex justify-between items-center w-[400px] shadow hover:shadow-lg transition">
         <div>
-          <div className="text-[17px] font-bold mb-1">{usuario.nome}</div>
-          <div className="text-[14px] opacity-60">{usuario.email}</div>
+          <div className="text-[17px] font-bold mb-1">{form.nome}</div>
+          <div className="text-[14px] opacity-60">{form.email}</div>
         </div>
 
         <div className="flex gap-3">
-          {/* Botão Editar — mesma aparência original */}
           <button
             className="bg-[#0066FF] text-white p-2 rounded-full cursor-pointer"
             onClick={() => setAbrir(true)}
@@ -79,7 +83,19 @@ export default function GerenciarUsuario({ usuario, onAtualizarLista }) {
             <FiEdit2 size={18} />
           </button>
 
-          {/* Botão Deletar — mesma aparência original */}
+          <button
+            className={`${
+              suspenso ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"
+            } text-white p-2 rounded-full cursor-pointer transition-colors ${
+              loading ? "opacity-60 pointer-events-none" : ""
+            }`}
+            onClick={suspender}
+            aria-label={suspenso ? `Reativar ${usuario.nome}` : `Suspender ${usuario.nome}`}
+            title={suspenso ? "Reativar usuário" : "Suspender usuário"}
+          >
+            <FiClock size={18} />
+          </button>
+
           <button
             className="bg-yellow-400 hover:bg-yellow-500 text-white p-2 rounded-full cursor-pointer transition-colors"
             onClick={deletar}
