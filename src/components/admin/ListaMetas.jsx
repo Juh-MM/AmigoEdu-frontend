@@ -2,7 +2,7 @@ import NovaMeta from "./NovaMeta";
 
 export default function ListaMetas({ metas, onAtualizarLista, onEditar }) {
   return (
-    <div className="mt-10 flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <h2 className="text-2xl font-semibold mb-6 self-start">
         Todas as metas
       </h2>

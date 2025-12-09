@@ -11,8 +11,8 @@ export default function Profile() {
         <div className="flex flex-row justify-end m-5">
             <div className="flex flex-row gap-2 items-center">
                 <div className="flex flex-col items-end">
-                    <span className="text-sm text-sky-900">{nome}</span>
-                    <span className="text-xs">{email}</span>
+                    <span className="text-sm font-semibold">{nome}</span>
+                    <span className="text-xs text-sky-900">{email}</span>
                 </div>
                 <CgProfile className="text-4xl" />
             </div>

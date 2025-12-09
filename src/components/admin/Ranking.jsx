@@ -1,4 +1,5 @@
 import { FaTrophy } from "react-icons/fa";
+import RankingTabs from "./RankingTabs";
 
 export default function Ranking({ tabs = [], activeTab, onChangeTab, data = [] }) {
   // Função para pegar medalha/top 3
@@ -11,26 +12,11 @@ export default function Ranking({ tabs = [], activeTab, onChangeTab, data = [] }
 
   return (
     <div className="mt-4 flex flex-col gap-4">
-      {/* TABS */}
-      <div className="flex gap-2 flex-wrap mb-6">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => onChangeTab(tab)}
-            className={`px-4 py-2 rounded-xl font-medium transition ${
-              activeTab === tab
-                ? "bg-blue-600 text-white shadow-md"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+      <RankingTabs tabs={tabs} activeTab={activeTab} onChange={onChangeTab} />
 
       {/* LISTA DO RANKING */}
       {data.length === 0 ? (
-        <p className="text-gray-500">Nenhum usuário encontrado.</p>
+        <p className="text-gray-500 text-center mt-4">Nenhum usuário encontrado para este período.</p>
       ) : (
         <div className="flex flex-col gap-3">
           {data.map((usuario, index) => {
@@ -39,7 +25,7 @@ export default function Ranking({ tabs = [], activeTab, onChangeTab, data = [] }
             return (
               <div
                 key={usuario.id ?? index}
-                className="flex justify-between items-center p-4 bg-white rounded-3xl shadow-md hover:shadow-lg transition"
+                className="flex justify-between items-center p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition"
               >
                 <div className="flex items-center gap-3">
                   {/* Medalha para top 3 */}

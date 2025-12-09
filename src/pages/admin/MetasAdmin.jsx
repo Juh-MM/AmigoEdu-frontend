@@ -46,7 +46,7 @@ export default function MetasAdmin() {
       </div>
 
       {/* Card criar meta ou formulário */}
-      <div className="flex w-full justify-center py-4">
+      <div className="flex w-full justify-center py-8">
         {!mostrandoForm ? (
           <MetaCardCriar onAbrirFormulario={abrirFormularioCriar} />
         ) : (

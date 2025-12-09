@@ -1,12 +1,15 @@
-import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { FaRegCheckSquare } from "react-icons/fa";
 import { LuCrown } from "react-icons/lu";
 import { TbWorld } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
-import BotaoSair from "./BotaoSair";
+import { TbLogout2 } from "react-icons/tb";
+
 import Logo from '../assets/Logo.png';
+
+import { useNavigate } from "react-router-dom";
+import { logout } from "../services/authService";
 
 export default function Sidebar() {
   const { pathname } = useLocation();
@@ -33,6 +36,19 @@ export default function Sidebar() {
     { to: "/configuracoes", icon: <IoSettingsOutline className="text-amber-50 text-lg" />, label: "Configurações" },
   ];
 
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+        try {
+            await logout();
+        } catch (error) {
+            console.error("Erro ao fazer logout:", error);
+        } finally {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user"); // Limpa também os dados do usuário
+            navigate("/");
+        }
+  }
+
   return (
     <>
       {/* Desktop / md+ sidebar */}
@@ -55,9 +71,11 @@ export default function Sidebar() {
         </div>
 
         <div className="w-full">
-          <BotaoSair className="w-full flex items-center gap-3 justify-center bg-amber-50 text-sky-700 py-3 rounded-xl hover:opacity-95" >
-            <span className="font-semibold">Sair</span>
-          </BotaoSair>
+          <button className="flex gap-4 p-2 w-25 justify-center bg-sky-700/50 rounded-2xl hover:bg-sky-700/70 hover:cursor-pointer"
+          onClick={handleLogout}>
+            <TbLogout2 className="text-amber-50 text-xl"/>
+            <span className="text-amber-50">Sair</span>
+          </button>
         </div>
       </aside>
 
@@ -86,10 +104,7 @@ export default function Sidebar() {
 
           <div className="flex-shrink-0 pl-1">
             <button
-              onClick={() => {
-                const evt = new CustomEvent("app:logout");
-                window.dispatchEvent(evt);
-              }}
+              onClick={handleLogout}
               aria-label="Sair"
               title="Sair"
               className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-amber-50/30 text-white hover:opacity-95 px-2 py-2"

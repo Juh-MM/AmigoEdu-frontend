@@ -64,7 +64,7 @@ export default function Home() {
     }
 
     return(
-        <div className="flex flex-col gap-10 m-5 mb-30 md:mb-0 md:ml-0 justify-center">
+        <div className="flex flex-col gap-10 m-5 mb-30 mt-0 md:mb-0 md:ml-0 justify-center">
         <div className="border-b border-gray-200 pb-6">
         <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
           Olá, {nome}! 👋

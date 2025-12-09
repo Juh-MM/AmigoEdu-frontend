@@ -85,13 +85,6 @@ export default function FormNotificacoes() {
           onToggle={() => toggleNotificacao('novidades')}
         />
       </div>
-
-      {/* Save Hint */}
-      <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-        <p className="text-sm text-blue-700 text-center">
-          As alterações são salvas automaticamente
-        </p>
-      </div>
     </div>
   );
 }

@@ -1,69 +1,45 @@
-import { useEffect, useState } from "react";
-import api from "../services/api";
+import { FaTrophy } from "react-icons/fa";
 import RankingTabs from "./RankingTabs";
-import RankingLista from "./RankingLista";
 
-export default function Ranking({ tabs, activeTab, onChangeTab }) {
-  const [data, setData] = useState([]);
-
-  // DEFINE QUAL ENDPOINT CHAMAR
-  const rotas = {
-    "Diário": "/ranking/diario",
-    "Semanal": "/ranking/semanal",
-    "Mensal": "/ranking/mensal",
-    "Todos": "/ranking/todos"
-  };
-
-  useEffect(() => {
-    async function carregar() {
-      try {
-        const resp = await api.get(
-          rotas[activeTab] || "/ranking/todos"
-        );
-
-        setData(resp.data.data || []);
-      } catch (error) {
-        console.error("Erro ao carregar ranking:", error);
-      }
-    }
-
-    carregar();
-  }, [activeTab]);
-
-  // CORES POR POSIÇÃO (mantidas iguaizinhas ao seu layout)
-  const getColor = (pos) => {
-    if (pos === 0) return "#D59300"; // 1°
-    if (pos === 1) return "#818181"; // 2°
-    if (pos === 2) return "#6B4111"; // 3°
-    return "#B3B5B8"; // resto
+export default function Ranking({ tabs = [], activeTab, onChangeTab, data = [] }) {
+  // Função para pegar medalha/top 3
+  const getMedalColor = (index) => {
+    if (index === 0) return "text-yellow-400"; // ouro
+    if (index === 1) return "text-gray-400";   // prata
+    if (index === 2) return "text-amber-700";  // bronze
+    return "text-gray-500";
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="mt-4 flex flex-col gap-4">
+      <RankingTabs tabs={tabs} activeTab={activeTab} onChange={onChangeTab} />
 
-      {/* TABS */}
-      <RankingTabs
-        tabs={tabs}
-        activeTab={activeTab}
-        onChange={onChangeTab}
-      />
+      {/* LISTA DO RANKING */}
+      {data.length === 0 ? (
+        <p className="text-gray-500 text-center mt-4">Nenhum usuário encontrado para este período.</p>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {data.map((usuario, index) => {
+            const pontos = usuario.pontos ?? usuario.gamificacao?.pontos ?? 0;
 
-      {/* LISTAS */}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <RankingLista
-          data={data.slice(0, 6)}
-          baseIndex={1}
-          corPosicao={(i) => getColor(i)}
-        />
-
-        <RankingLista
-          data={data.slice(6)}
-          baseIndex={7}
-          corPosicao={() => "#B3B5B8"}
-        />
-
-      </div>
+            return (
+              <div
+                key={usuario.id ?? index}
+                className="flex justify-between items-center p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition"
+              >
+                <div className="flex items-center gap-3">
+                  {/* Medalha para top 3 */}
+                  <FaTrophy className={`${getMedalColor(index)} text-2xl`} />
+                  <span className="font-medium text-lg">
+                    {index + 1}. {usuario.nome ?? usuario.usuario?.nome ?? "—"}
+                  </span>
+                </div>
+                <span className="font-bold text-blue-600 text-lg">{pontos} pts</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
