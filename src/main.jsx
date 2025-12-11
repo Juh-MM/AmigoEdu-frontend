@@ -24,10 +24,16 @@ createRoot(document.getElementById('root')).render(
 )
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/service-worker.js')
-      .then(() => console.log('Service Worker registrado!'))
-      .catch((err) => console.error('Erro ao registrar SW:', err));
-  });
+  if (import.meta.env.PROD) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('Service Worker registrado!', reg.scope, reg.active?.scriptURL))
+        .catch(err => console.error('SW registration failed:', err));
+    });
+  } else {
+    // DEV: garante que não existam SWs ativos que atrapalhem o Vite
+    navigator.serviceWorker.getRegistrations()
+      .then(regs => regs.forEach(r => { console.log('Unregistering in dev:', r.scope); r.unregister(); }))
+      .catch(() => {});
+  }
 }
